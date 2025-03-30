@@ -1,0 +1,6 @@
+@NyTimes.Api_HostAddress = http://localhost:5107
+
+GET {{NyTimes.Api_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

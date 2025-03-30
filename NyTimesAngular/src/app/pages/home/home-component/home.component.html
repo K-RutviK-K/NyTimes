@@ -1,0 +1,58 @@
+<div class="container mt-4">
+    <h2 class="mb-3 text-center">📰 Top News Stories</h2>
+    <!-- <div class="mb-3 d-flex justify-content-center">
+        <input 
+            type="text" 
+            class="form-control w-50 me-2" 
+            placeholder="Enter API Key" 
+            [(ngModel)]="apiKey"
+        />
+        <button class="btn btn-success" (click)="submit()">Submit</button>
+    </div> -->
+
+<div class="mb-3 d-flex justify-content-center">
+  <form [formGroup]="apiForm" (ngSubmit)="submit()" class="w-50">
+    <div class="input-group">
+      <input 
+        type="text" 
+        class="form-control" 
+        placeholder="Enter API Key" 
+        formControlName="apiKey"
+      />
+      <button type="submit" class="btn btn-success" [disabled]="apiForm.invalid">
+        Submit
+      </button>
+
+
+      
+    </div>
+
+    <div *ngIf="apiForm.get('apiKey')?.invalid && apiForm.get('apiKey')?.touched" class="text-danger mt-2">
+        <span *ngFor="let error of getErrors('apiKey')">{{ error }}</span>
+      </div>
+    </form>
+</div>
+    <div class="table-responsive" *ngIf="articles.length>0">
+      <table class="table-warning table-striped table-bordered table-hover table">
+        <thead class="table-dark">
+          <tr>
+            <th>Title</th>
+            <th>Author</th>
+            <!-- <th>Published Date</th> -->
+            <th>Read More</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let article of articles">
+            <td>{{ article.title }}</td>
+            <td>{{ article.byline || 'Unknown' }}</td>
+            <!-- <td>{{ article.published_date  | date }}</td> -->
+            <td>
+              <a style="width: 90px;" [href]="article.url" target="_blank" class="btn btn-primary btn-sm">Read</a>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  
